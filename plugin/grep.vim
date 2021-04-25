@@ -3,6 +3,16 @@ if exists('g:grep_plugin')
 endif
 let g:grep_plugin = 1
 
+" Try to use RipGrep or TheSilverSearcher, if available:
+if executable('rg')
+  set grepprg=rg\ --vimgrep
+  set grepformat=%f:%l:%c:%m
+elseif executable('ag')
+  set grepprg=ag\ --vimgrep
+  set grepformat=%f:%l:%c:%m
+endif
+
+" Can we do an async :Grep?
 let g:grep_async = has('nvim') " || (has('job') && has('channel') && has('lambda'))
 
 if g:grep_async == 1
