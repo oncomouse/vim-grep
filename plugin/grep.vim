@@ -4,12 +4,14 @@ endif
 let g:grep_plugin = 1
 
 " Try to use RipGrep or TheSilverSearcher, if available:
-if executable('rg')
-  set grepprg=rg\ --vimgrep
-  set grepformat=%f:%l:%c:%m
-elseif executable('ag')
-  set grepprg=ag\ --vimgrep
-  set grepformat=%f:%l:%c:%m
+if get(g:, 'grep_guess_my_grepprg', 1)
+	if executable('rg')
+	  set grepprg=rg\ --vimgrep
+	  set grepformat=%f:%l:%c:%m
+	elseif executable('ag')
+	  set grepprg=ag\ --vimgrep
+	  set grepformat=%f:%l:%c:%m
+	endif
 endif
 
 " Can we do an async :Grep?
