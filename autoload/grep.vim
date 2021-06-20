@@ -59,6 +59,7 @@ function! s:grep_launch(qf, query) abort
     let s:grep_job = jobstart(l:command, {
           \'on_stdout': function('s:grep_output'),
           \'on_exit': function('s:grep_done'),
+		  \'pty': 1,
           \})
   else
     return system(l:command)
