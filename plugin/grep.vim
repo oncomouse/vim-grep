@@ -15,9 +15,9 @@ if get(g:, 'grep_guess_my_grepprg', 1)
 endif
 
 " Can we do an async :Grep?
-let g:grep_async = has('nvim') " || (has('job') && has('channel') && has('lambda'))
+let g:grep_async = get(g:, 'grep_async', has('nvim')) " || (has('job') && has('channel') && has('lambda'))
 
-if g:grep_async == 1
+if g:grep_async
   command! -nargs=+ -complete=file_in_path -bar Grep  call grep#grep(<f-args>)
   command! -nargs=+ -complete=file_in_path -bar LGrep call grep#lgrep(<f-args>)
 else
